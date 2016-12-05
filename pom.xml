@@ -6,7 +6,7 @@
   <groupId>de.sonia.maven</groupId>
   <artifactId>sonia-maven-parent</artifactId>
   <packaging>pom</packaging>
-  <version>1-SNAPSHOT</version>
+  <version>1</version>
   <name>${project.artifactId}</name>
   <url>https://github.com/campussource-liferay-portlets/${project.artifactId}</url>
 
