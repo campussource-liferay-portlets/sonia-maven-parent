@@ -3,12 +3,12 @@
 
   <modelVersion>4.0.0</modelVersion>
   
-  <groupId>sonia.maven</groupId>
+  <groupId>de.sonia.maven</groupId>
   <artifactId>sonia-maven-parent</artifactId>
   <packaging>pom</packaging>
-  <version>20-SNAPSHOT</version>
+  <version>1-SNAPSHOT</version>
   <name>${project.artifactId}</name>
-  <url>https://code.ostfalia.de/projects/${project.groupId}/${project.artifactId}</url>
+  <url>https://github.com/campussource-liferay-portlets/${project.artifactId}</url>
 
   <organization>
     <name>Ostfalia - University of Applied Sciences</name>
@@ -22,55 +22,15 @@
     </mailingList>
   </mailingLists>
   
-  <issueManagement>
-    <system>jira</system>
-    <url>https://jira.sonia.de/browse/DEV</url>
-  </issueManagement>
-  
   <prerequisites>
     <maven>3.0.0</maven>
   </prerequisites>
   
   <scm>
-    <connection>scm:hg:https://scm.ostfalia.de/scm/hg/maven/sonia-maven-parent</connection>
-    <developerConnection>scm:hg:https://scm.ostfalia.de/scm/hg/maven/sonia-maven-parent</developerConnection>
-    <url>https://scm.ostfalia.de/scm/hg/maven/sonia-maven-parent</url>
+    <connection>scm:git:https://github.com/campussource-liferay-portlets/sonia-maven-parent</connection>
+    <developerConnection>scm:git:https://github.com/campussource-liferay-portlets/sonia-maven-parent</developerConnection>
+    <url>https://github.com/campussource-liferay-portlets/sonia-maven-parent</url>
   </scm>
-
-  <repositories>
-
-    <repository>
-      <id>maven.ostfalia.de</id>
-      <name>Sonia Nexus Repository</name>
-      <url>http://maven.ostfalia.de/nexus/content/groups/public</url>
-      <releases>
-        <enabled>true</enabled>
-      </releases>
-      <snapshots>
-        <enabled>true</enabled>
-        <updatePolicy>always</updatePolicy>
-      </snapshots>
-    </repository>
-    
-  </repositories>
-
-  <pluginRepositories>
-
-    <pluginRepository>
-      <id>maven.ostfalia.de</id>
-      <name>Sonia Nexus Plugin Repository</name>
-      <url>http://maven.ostfalia.de/nexus/content/groups/public</url>
-      <releases>
-        <enabled>true</enabled>
-        <updatePolicy>never</updatePolicy>
-      </releases>
-      <snapshots>
-        <enabled>true</enabled>
-        <updatePolicy>always</updatePolicy>
-      </snapshots>
-    </pluginRepository>
-
-  </pluginRepositories>
 
   <build>
     <plugins>
@@ -284,28 +244,6 @@
       </build>
     </profile>
   </profiles>
-
-  <distributionManagement>
-
-    <repository>
-      <id>maven.ostfalia.de</id>
-      <name>Sonia Nexus Release Repository</name>
-      <url>https://maven.ostfalia.de/nexus/content/repositories/releases</url>
-    </repository>
-
-    <snapshotRepository>
-      <id>maven.ostfalia.de</id>
-      <name>Sonia Nexus Snapshot Repository</name>
-      <url>https://maven.ostfalia.de/nexus/content/repositories/snapshots</url>
-    </snapshotRepository>
-
-    <site>
-      <id>code.ostfalia.de</id>
-      <name>Sonia Project Sites</name>
-      <url>davs://code.ostfalia.de/projects/</url>
-    </site>
-
-  </distributionManagement>
 
   <properties>
     <!-- release plugin -->
