@@ -1,0 +1,349 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
+
+  <modelVersion>4.0.0</modelVersion>
+  
+  <groupId>sonia.maven</groupId>
+  <artifactId>sonia-maven-parent</artifactId>
+  <packaging>pom</packaging>
+  <version>20-SNAPSHOT</version>
+  <name>${project.artifactId}</name>
+  <url>https://code.ostfalia.de/projects/${project.groupId}/${project.artifactId}</url>
+
+  <organization>
+    <name>Ostfalia - University of Applied Sciences</name>
+    <url>http://www.ostfalia.de/</url>
+  </organization>
+
+  <mailingLists>
+    <mailingList>
+      <name>CSIT</name>
+      <post>csit@ostfalia.de</post>
+    </mailingList>
+  </mailingLists>
+  
+  <issueManagement>
+    <system>jira</system>
+    <url>https://jira.sonia.de/browse/DEV</url>
+  </issueManagement>
+  
+  <prerequisites>
+    <maven>3.0.0</maven>
+  </prerequisites>
+  
+  <scm>
+    <connection>scm:hg:https://scm.ostfalia.de/scm/hg/maven/sonia-maven-parent</connection>
+    <developerConnection>scm:hg:https://scm.ostfalia.de/scm/hg/maven/sonia-maven-parent</developerConnection>
+    <url>https://scm.ostfalia.de/scm/hg/maven/sonia-maven-parent</url>
+  </scm>
+
+  <repositories>
+
+    <repository>
+      <id>maven.ostfalia.de</id>
+      <name>Sonia Nexus Repository</name>
+      <url>http://maven.ostfalia.de/nexus/content/groups/public</url>
+      <releases>
+        <enabled>true</enabled>
+      </releases>
+      <snapshots>
+        <enabled>true</enabled>
+        <updatePolicy>always</updatePolicy>
+      </snapshots>
+    </repository>
+    
+  </repositories>
+
+  <pluginRepositories>
+
+    <pluginRepository>
+      <id>maven.ostfalia.de</id>
+      <name>Sonia Nexus Plugin Repository</name>
+      <url>http://maven.ostfalia.de/nexus/content/groups/public</url>
+      <releases>
+        <enabled>true</enabled>
+        <updatePolicy>never</updatePolicy>
+      </releases>
+      <snapshots>
+        <enabled>true</enabled>
+        <updatePolicy>always</updatePolicy>
+      </snapshots>
+    </pluginRepository>
+
+  </pluginRepositories>
+
+  <build>
+    <plugins>
+
+      <plugin>
+        <groupId>org.apache.maven.plugins</groupId>
+        <artifactId>maven-compiler-plugin</artifactId>
+        <version>3.1</version>
+        <configuration>
+          <source>${project.build.jdkVersion}</source>
+          <target>${project.build.jdkVersion}</target>
+          <encoding>${project.build.sourceEncoding}</encoding>
+        </configuration>
+      </plugin>
+
+      <plugin>
+        <groupId>org.apache.maven.plugins</groupId>
+        <artifactId>maven-resources-plugin</artifactId>
+        <version>2.7</version>
+        <configuration>
+          <encoding>${project.build.sourceEncoding}</encoding>
+        </configuration>
+      </plugin>
+      
+      <plugin>
+        <groupId>org.apache.maven.plugins</groupId>
+        <artifactId>maven-clean-plugin</artifactId>
+        <version>2.6.1</version>
+      </plugin>
+
+      <plugin>
+        <groupId>org.apache.maven.plugins</groupId>
+        <artifactId>maven-deploy-plugin</artifactId>
+        <version>2.8.2</version>
+      </plugin>
+      
+      <plugin>
+        <groupId>org.apache.maven.plugins</groupId>
+        <artifactId>maven-source-plugin</artifactId>
+        <version>2.4</version>
+      </plugin>
+      
+      <plugin>
+        <groupId>org.apache.maven.plugins</groupId>
+        <artifactId>maven-install-plugin</artifactId>
+        <version>2.5.2</version>
+      </plugin>
+      
+      <plugin>
+        <groupId>org.apache.maven.plugins</groupId>
+        <artifactId>maven-release-plugin</artifactId>
+        <version>${release-plugin.version}</version>
+        <configuration>
+          <goals>deploy</goals>
+          <pushChanges>false</pushChanges>
+          <localCheckout>true</localCheckout>
+          <releaseProfiles>release</releaseProfiles>
+          <tagNameFormat>@{project.version}</tagNameFormat>
+        </configuration>
+      </plugin>
+      
+      <plugin>
+        <groupId>org.apache.maven.plugins</groupId>
+        <artifactId>maven-javadoc-plugin</artifactId>
+        <version>2.10.1</version>
+        <configuration>
+          <useStandardDocletOptions>true</useStandardDocletOptions>
+          <charset>${project.build.sourceEncoding}</charset>
+          <encoding>${project.build.sourceEncoding}</encoding>
+          <docencoding>${project.build.sourceEncoding}</docencoding>
+          <breakiterator>true</breakiterator>
+          <version>true</version>
+          <author>true</author>
+          <keywords>true</keywords>
+          <links>
+            <link>http://download.oracle.com/javase/6/docs/api/</link>
+            <link>http://download.oracle.com/docs/cd/E17802_01/products/products/servlet/2.5/docs/servlet-2_5-mr2/</link>
+          </links>
+          <additionalparam>${javadoc.additionalparam}</additionalparam>
+        </configuration>
+      </plugin>
+      
+      <plugin>
+        <groupId>com.mycila.maven-license-plugin</groupId>
+        <artifactId>maven-license-plugin</artifactId>
+        <version>1.9.0</version>
+        <configuration>
+          <header>http://maven.ostfalia.de/copyright/maven/ostfalia-copyright.txt</header>
+          <includes>
+            <include>src/**</include>
+            <include>**/test/**</include>
+          </includes>
+          <excludes>
+            <exclude>target/**</exclude>
+            <exclude>.hg/**</exclude>
+          </excludes>
+          <strictCheck>true</strictCheck>
+        </configuration>
+      </plugin>
+  
+      <plugin>
+        <groupId>org.apache.maven.plugins</groupId>
+        <artifactId>maven-site-plugin</artifactId>
+        <version>3.4</version>
+        <configuration>
+          <reportPlugins>
+
+            <plugin>
+              <groupId>org.apache.maven.plugins</groupId>
+              <artifactId>maven-project-info-reports-plugin</artifactId>
+              <version>2.7</version>
+            </plugin>
+
+            <plugin>
+              <groupId>org.apache.maven.plugins</groupId>
+              <artifactId>maven-jxr-plugin</artifactId>
+              <version>2.4</version>
+            </plugin>
+
+            <plugin>
+              <groupId>org.codehaus.mojo</groupId>
+              <artifactId>findbugs-maven-plugin</artifactId>
+              <version>3.0.0</version>
+            </plugin>
+
+            <plugin>
+              <groupId>org.apache.maven.plugins</groupId>
+              <artifactId>maven-pmd-plugin</artifactId>
+              <version>3.2</version>
+              <configuration>
+                <linkXref>true</linkXref>
+                <sourceEncoding>${project.build.sourceEncoding}</sourceEncoding>
+                <targetJdk>${project.build.jdkVersion}</targetJdk>
+              </configuration>
+            </plugin>
+
+          </reportPlugins>
+        </configuration>
+          
+      </plugin>
+          
+    </plugins>
+    
+    <extensions>
+    
+      <extension>
+        <groupId>org.apache.maven.wagon</groupId>
+        <artifactId>wagon-webdav-jackrabbit</artifactId>
+        <version>2.7</version>
+      </extension>
+    
+    </extensions>
+  </build>
+  
+  <profiles>
+    <profile>
+      <id>java8-profile</id>
+      <activation>
+        <jdk>1.8</jdk>
+      </activation>
+      
+      <properties>
+        <javadoc.additionalparam>-Xdoclint:none</javadoc.additionalparam>
+      </properties>
+      
+    </profile>
+    <profile>
+      <id>jrebel</id>
+
+      <build>
+        <plugins>
+
+          <plugin>
+            <groupId>org.zeroturnaround</groupId>
+            <artifactId>jrebel-maven-plugin</artifactId>
+            <version>1.1.5</version>
+            <executions>
+              <execution>
+                <id>generate-rebel-xml</id>
+                <phase>process-resources</phase>
+                <goals>
+                  <goal>generate</goal>
+                </goals>
+              </execution>
+            </executions>
+          </plugin>
+
+        </plugins>
+      </build>
+      
+    </profile>
+    <profile>
+      <id>jenkins</id>
+      
+      <build>
+        <plugins>
+
+          <plugin>
+            <groupId>org.apache.maven.plugins</groupId>
+            <artifactId>maven-release-plugin</artifactId>
+            <version>${release-plugin.version}</version>
+            <configuration>
+              <pushChanges>true</pushChanges>
+              <localCheckout>true</localCheckout>
+              <releaseProfiles>release</releaseProfiles>
+              <tagNameFormat>@{project.version}</tagNameFormat>
+            </configuration>
+          </plugin>
+
+        </plugins>
+      </build>
+    </profile>
+  </profiles>
+
+  <distributionManagement>
+
+    <repository>
+      <id>maven.ostfalia.de</id>
+      <name>Sonia Nexus Release Repository</name>
+      <url>https://maven.ostfalia.de/nexus/content/repositories/releases</url>
+    </repository>
+
+    <snapshotRepository>
+      <id>maven.ostfalia.de</id>
+      <name>Sonia Nexus Snapshot Repository</name>
+      <url>https://maven.ostfalia.de/nexus/content/repositories/snapshots</url>
+    </snapshotRepository>
+
+    <site>
+      <id>code.ostfalia.de</id>
+      <name>Sonia Project Sites</name>
+      <url>davs://code.ostfalia.de/projects/</url>
+    </site>
+
+  </distributionManagement>
+
+  <properties>
+    <!-- release plugin -->
+    <release-plugin.version>2.5.3</release-plugin.version>
+    
+    <!-- project settings -->
+    <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+    <project.build.jdkVersion>1.8</project.build.jdkVersion>
+    
+    <!-- netbeans settings -->
+    <netbeans.hint.license>ostfalia-copyright</netbeans.hint.license>
+    
+    <!-- javadoc extaparams -->
+    <javadoc.additionalparam></javadoc.additionalparam>
+
+    <!-- specs & implementations -->
+    <commons-codec.version>1.10</commons-codec.version>
+    <commons-fileupload.version>1.3.1</commons-fileupload.version>
+    <commons-io.version>2.5</commons-io.version>
+    <commons-lang.version>2.6</commons-lang.version>
+    <guava.version>19.0</guava.version>
+    <javax.mail-api.version>1.5.5</javax.mail-api.version>
+    <joda-time.version>2.9.3</joda-time.version>
+    <junit.version>4.11</junit.version>
+    <log4j.version>1.2.17</log4j.version>
+    <maven-compiler-plugin.version>3.5.1</maven-compiler-plugin.version>
+    <maven-war-plugin.version>2.6</maven-war-plugin.version>
+    <pdf-renderer.version>1.0.5</pdf-renderer.version>
+    <slf4j-api.version>1.7.21</slf4j-api.version>
+    <unboundid-ldapsdk.version>3.1.1</unboundid-ldapsdk.version>
+
+    <!-- sonia -->
+    <sonia-commons-config.version>1.0.0</sonia-commons-config.version>
+    <sonia-commons-ldap.version>1.0.4</sonia-commons-ldap.version>
+    <sonia-commons-manifest.version>1.1.1</sonia-commons-manifest.version>
+    <sonia-commons-validation.version>1.0.1</sonia-commons-validation.version>
+    <sonia-maven-native2utf8-plugin.version>1.0.0</sonia-maven-native2utf8-plugin.version>
+    
+  </properties>
+  
+</project>
