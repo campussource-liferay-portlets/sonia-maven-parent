@@ -6,14 +6,32 @@
   <groupId>de.sonia.maven</groupId>
   <artifactId>sonia-maven-parent</artifactId>
   <packaging>pom</packaging>
-  <version>2-SNAPSHOT</version>
+  <version>1</version>
   <name>${project.artifactId}</name>
   <url>https://github.com/campussource-liferay-portlets/${project.artifactId}</url>
+
+  <description>General POM for SONIA projects</description>
 
   <organization>
     <name>Ostfalia - University of Applied Sciences</name>
     <url>http://www.ostfalia.de/</url>
   </organization>
+
+  <licenses>
+    <license>
+      <name>The Apache Software License, Versino 2.0</name>
+      <url>http://www.apache.org/licenses/LICENSE-2.0.txt</url>
+    </license>
+  </licenses>
+
+  <developers>
+    <developer>
+      <id>thorsten-l</id>
+      <name>Thorsten Ludewig</name>
+      <email>t.ludewig@ostfalia.de</email>
+      <timezone>Europe/Berlin</timezone>
+    </developer>
+  </developers>
 
   <mailingLists>
     <mailingList>
@@ -33,14 +51,14 @@
   </scm>
 
   <distributionManagement>
-      <snapshotRepository>
-          <id>ossrh</id>
-          <url>https://oss.sonatype.org/content/repositories/snapshots/</url>
-      </snapshotRepository>
-      <repository>
-          <id>ossrh</id>
-          <url>https://oss.sonatype.org/service/local/staging/deploy/maven2/</url>
-      </repository>
+    <snapshotRepository>
+      <id>ossrh</id>
+      <url>https://oss.sonatype.org/content/repositories/snapshots/</url>
+    </snapshotRepository>
+    <repository>
+      <id>ossrh</id>
+      <url>https://oss.sonatype.org/service/local/staging/deploy/maven2/</url>
+    </repository>
   </distributionManagement>
 
   <build>
@@ -68,20 +86,37 @@
       
       <plugin>
         <groupId>org.apache.maven.plugins</groupId>
-        <artifactId>maven-clean-plugin</artifactId>
-        <version>2.6.1</version>
-      </plugin>
-
-      <plugin>
-        <groupId>org.apache.maven.plugins</groupId>
-        <artifactId>maven-deploy-plugin</artifactId>
-        <version>2.8.2</version>
+        <artifactId>maven-source-plugin</artifactId>
+        <version>3.0.1</version>
+        <executions>
+          <execution>
+            <id>attach-sources</id>
+            <goals>
+              <goal>jar-no-fork</goal>
+            </goals>
+          </execution>
+        </executions>
       </plugin>
       
       <plugin>
+      <groupId>org.apache.maven.plugins</groupId>
+      <artifactId>maven-gpg-plugin</artifactId>
+      <version>1.6</version>
+      <executions>
+        <execution>
+          <id>sign-artifacts</id>
+          <phase>verify</phase>
+          <goals>
+            <goal>sign</goal>
+          </goals>
+        </execution>
+      </executions>
+    </plugin>
+      
+      <plugin>
         <groupId>org.apache.maven.plugins</groupId>
-        <artifactId>maven-source-plugin</artifactId>
-        <version>2.4</version>
+        <artifactId>maven-clean-plugin</artifactId>
+        <version>2.6.1</version>
       </plugin>
       
       <plugin>
@@ -122,6 +157,14 @@
           </links>
           <additionalparam>${javadoc.additionalparam}</additionalparam>
         </configuration>
+        <executions>
+          <execution>
+            <id>attach-javadocs</id>
+            <goals>
+              <goal>jar</goal>
+            </goals>
+          </execution>
+        </executions>
       </plugin>
         
       <plugin>
